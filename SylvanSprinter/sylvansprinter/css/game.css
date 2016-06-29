@@ -1,0 +1,88 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    width: 100%;
+    vertical-align: bottom;
+}
+
+#debugHitboxContainer {
+    margin: auto;
+    width: 1118px;
+    vertical-align: bottom;
+    text-align: right;
+}
+
+#controls {
+    width: 100%;
+    vertical-align: bottom;
+    text-align: center;
+}
+
+#score {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+#gameContainer {
+    width: 100%;
+    height: 485px;
+    position: relative;
+}
+
+#myCanvas {
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#startOverlay {
+    margin: auto;
+    position: absolute;
+    width: 1118px;
+    height: 485px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: block;
+    height: 200px;
+    text-align: center;
+    color: white;
+}
+
+#gameOverOverlay {
+    margin: auto;
+    position: absolute;
+    width: 1118px;
+    height: 485px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: none;
+    height: 200px;
+    text-align: center;
+    color: white;
+}
+
+#gameContainer h1 {
+    font-size: 3em;
+    font-family: sans-serif;
+}
+
+#gameContainer h3 {
+    font-size: 2em;
+    font-family: sans-serif;
+}

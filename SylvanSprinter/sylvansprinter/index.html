@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Sylvan Sprinter</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/game.css">
+</head>
+<body margin="0" padding="0" bgcolor="#3A3238" text="#FFFFFF">
+    <div id="header"> 
+        <div id="instructions">
+            <center>
+                <h2><u>Sylvan Sprinter</u></h2>
+                How long can you last in the wild?
+            </center>
+        </div>
+        <div id="controls">
+            <h3>CONTROLS</h3>
+            Press the <b>[SPACEBAR]</b> to jump over stumps and rocks.<br />
+            Press the <b>[RIGHT ARROW KEY]</b> to slice down stone pillars.<br />
+            <p><img src='res/art/jumpoverthese.png' />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src='res/art/slicethis.png' /></p>
+        </div>
+        <div id="score">
+            <h1 id="txtScore">Score: 0</h1>
+        </div>
+        <div style="clear:both;"></div>
+    </div>
+    <div id="gameContainer">
+        <canvas id="myCanvas" width="1116" height="485">This is a canvas!</canvas>
+        <div id="startOverlay" width="1116" height="485">
+            <h1 id="overlayTitle">Sylvan Sprinter</h1>
+            <h3 id="overlayDescription">Press the "R" Key to Start</h3>
+        </div>
+        <div id="gameOverOverlay" width="1116" height="485">
+            <h1 id="overlayTitle">Game Over!</h1>
+            <h3 id="overlayDescription">Press the "R" Key to Restart</h3>
+        </div>
+    </div>
+    <div id="debugHitboxContainer">
+        <label for="debugHitbox">Show hitboxes:</label>
+        <input type="checkbox" id="debugHitbox" onchange="onDebugHitboxChanged()" />
+    </div>
+    <script src="js/entity.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/resources.js"></script>
+    <script src="js/sprite.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/gamedata.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

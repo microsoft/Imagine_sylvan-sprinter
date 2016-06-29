@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SylvanSprinter", "..\SylvanSprinter\sylvansprinter\", "{4E4A1D53-A0CF-460E-9D07-CB8BC4C62A92}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_61213"
+		Debug.AspNetCompiler.PhysicalPath = "..\SylvanSprinter\sylvansprinter\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61213\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_61213"
+		Release.AspNetCompiler.PhysicalPath = "..\SylvanSprinter\sylvansprinter\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_61213\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "61213"
+		SlnRelativePath = "..\SylvanSprinter\sylvansprinter\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E4A1D53-A0CF-460E-9D07-CB8BC4C62A92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E4A1D53-A0CF-460E-9D07-CB8BC4C62A92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
