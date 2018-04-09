@@ -145,9 +145,23 @@ function reset()
 //----------------------------------------------------------------------------------------------------
 
 // Logic to add obstacles to the level
-function addObstacle()
-{
-    // *** Add your source code here ***
+function addObstacle() {
+    // Set obstacle to spawn off the right side of the screen
+    var initialPositionX = canvas.width + 50;
+
+    // Pick a random obstacle
+    var random = gamedata.obstacleTypes[Math.floor(Math.random() *
+        gamedata.obstacleTypes.length)];
+
+    // Add a new obstacle of the type from the list
+    var obstacle = new Entity(initialPositionX, gameFloor +
+        random.verticalPos, random.offset[0], random.offset[1], random.size[0],
+        random.size[1], random.sprite(), "yellow");
+
+
+    obstacle.obsType = random.obsType;
+    obstacle.broken = false; //Obstacles only break when player breaks them
+    obstacles.push(obstacle);
 }
 
 // Logic to add a new foreground art piece
@@ -215,9 +229,20 @@ function update( dt )
     score += dt * 1000;
     scoreText.innerHTML = "Score: " + score;
     
-    // *** Add your source code here ***
-
-    var dilatedTime = dt;
+    // Figure out the speed ramp based on game time
+    gameTime += dt;
+    if (gameTime > difficultyRampStart && gameTime <= difficultyRampEnd) {
+        // 0 to 100 difficulty from start to end time
+        percentDifficulty = (gameTime - difficultyRampStart) / (difficultyRampEnd - difficultyRampStart);
+        timeDilation = 1.0 + (percentDifficulty * (maxDilation - 1.0));
+        timeDilation = Math.min(maxDilation, timeDilation);
+    }
+    else if (gameTime > difficultyRampEnd)
+    {
+        timeDilation = maxDilation;
+    }
+    // Calculate new delta time
+    var dilatedTime = timeDilation * dt;
 
     // Process input
     handleInput();
@@ -393,7 +418,14 @@ function updateObstacles( dt )
         obstacles[i].sprite.update( dt );
     }
 
-    // *** Add your source code here ***
+    // Update distance since last obstacle
+    lastObstacleDistance -= delta;
+    if (lastObstacleDistance <= 0)
+    {
+        //Instantiate new obstacle
+        lastObstacleDistance = distanceBetweenObstacles;
+        addObstacle();  
+    }
 }
 
 // Logic to update foreground scrolling
@@ -436,14 +468,65 @@ function updateForeground( dt )
 // Logic for updating collisions
 function checkCollisions()
 {
-    // *** Add your source code here ***
+    // Check all obstacles
+    for (var i = 0; i < obstacles.length; ++i)
+    {
+        var obstacle = obstacles[i];
+        // Skip broken obstacles 
+        if (obstacle.broken)
+        {
+            continue;
+        }
+
+        // Check collision between player sword swings and stone obstacle
+        if (obstacle.obsType == "stone" &&
+            attacking &&
+            boxCollides(characterArms.pos, characterArms.size, obstacle.pos, obstacle.size)) {
+            // Break the obstacle and play its animation
+            obstacle.broken = true;
+            obstacle.sprite.playAnim(1, false);
+            playAudio('res/audio/stone_break_1.mp3');
+            continue;
+        }
+         // Check collision between player and obstacle
+        if (boxCollides(character.pos, character.size, obstacle.pos, obstacle.size))
+        {
+
+            // Stop jumping
+            currentJumpSpeed = 0;
+
+            // Play death animation
+            character.sprite.playAnim(2, false);
+            playAudio('res/audio/death_1.mp3');
+
+            // Game over!
+            startOverlay.style.display = 'none';
+            gameOverOverlay.style.display = 'block';
+            gameOver = true;
+            return;
+        
+        }
+
+
+    }
 }
 
 // Collision check between two rectangles
-function boxCollides( pos1, size1, pos2, size2 )
-{
-    // *** Add your source code here ***
-    return false;
+function boxCollides(pos1, size1, pos2, size2) {
+    var left1 = pos1[0];
+    var right1 = pos1[0] + size1[0];
+    var top1 = pos1[1] + size1[1];
+    var bottom1 = pos1[1];
+
+    var left2 = pos2[0];
+    var right2 = pos2[0] + size2[0];
+    var top2 = pos2[1] + size2[1];
+    var bottom2 = pos2[1];
+
+    if (right1 < left2 || left1 > right2 || top1 < bottom2 || bottom1 > top2) {
+        return false;
+    }
+    return true;
 }
 
 //----------------------------------------------------------------------------------------------------
