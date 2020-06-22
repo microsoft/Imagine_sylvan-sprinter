@@ -1,7 +1,7 @@
 ﻿( function ()
 {
     // Shim layer with setTimeout fallback
-    var requestAnimFrame = ( function ()
+    let requestAnimFrame = ( function ()
     {
         return window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
@@ -24,7 +24,7 @@
     // Audio helper function
     function playAudio( url )
     {
-        var audio = resources.get( url );
+        let audio = resources.get( url );
         audio.pause();
         audio.currentTime = 0;
         audio.play();

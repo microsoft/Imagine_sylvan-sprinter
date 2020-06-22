@@ -2,66 +2,66 @@
 // Global Variables
 //----------------------------------------------------------------------------------------------------
 
-var canvas = null;
-var ctx = null;
+let canvas = null;
+let ctx = null;
 
-var startOverlay = null;
-var gameOverOverlay = null;
+let startOverlay = null;
+let gameOverOverlay = null;
 
-var hitboxDebugCheckbox = null;
+let hitboxDebugCheckbox = null;
 
-var lastTime;
-var gameTime = 0;
+let lastTime;
+let gameTime = 0;
 
-var score = 0;
-var scoreText;
+let score = 0;
+let scoreText;
 
-var started = false;
-var gameOver = false;
-var paused = false;
+let started = false;
+let gameOver = false;
+let paused = false;
 
-var lastObstacleDistance = 0;
-var lastForegroundDistance = 0;
+let lastObstacleDistance = 0;
+let lastForegroundDistance = 0;
 
-var jumping = false;
-var currentJumpSpeed;
+let jumping = false;
+let currentJumpSpeed;
 
-var attacking = false;
-var attackTime = 0;
+let attacking = false;
+let attackTime = 0;
 
 // References to our game entities
-var character;
-var characterArms;
-var obstacles = []; // List of obstacles that we need to update
-var foregroundEntities = []; // List of foreground sprites that we need to update
+let character;
+let characterArms;
+let obstacles = []; // List of obstacles that we need to update
+let foregroundEntities = []; // List of foreground sprites that we need to update
 
 //----------------------------------------------------------------------------------------------------
 // Tuning Values
 //----------------------------------------------------------------------------------------------------
 
 // Speed-up variables
-var timeDilation; // Multiplier for time deltas
-var maxDilation = 2.5; // Final multiplier for time deltas
-var difficultyRampStart = 10.0; // Time (in seconds) to start ramping dilation
-var difficultyRampEnd = 60.0; // Time (in seconds) to finish ramping dilation
+let timeDilation; // Multiplier for time deltas
+const maxDilation = 2.5; // Final multiplier for time deltas
+const difficultyRampStart = 10.0; // Time (in seconds) to start ramping dilation
+const difficultyRampEnd = 60.0; // Time (in seconds) to finish ramping dilation
 
 // Spacing between obstacles and foreground objects
-var distanceBetweenObstacles = 535;
-var minDistanceBetweenForeground = 800;
-var maxDistanceBetweenForeground = 2000;
+const distanceBetweenObstacles = 535;
+const minDistanceBetweenForeground = 800;
+const maxDistanceBetweenForeground = 2000;
 
 // Initial game scrolling speed
-var scrollRate = 500;
-var foregroundScrollMultiplier = 1.75;
+const scrollRate = 500;
+const foregroundScrollMultiplier = 1.75;
 
 // y position of the floor
-var gameFloor = 25;
+const gameFloor = 25;
 
 // Jump physics
-var jumpHeight = 133;
-var jumpTime = 0.75;
-var gravity = -1400.0;
-var initialJumpSpeed = ( jumpHeight * 2 / jumpTime ) + ( 0.25 * -gravity * jumpTime );
+const jumpHeight = 133;
+const jumpTime = 0.75;
+const gravity = -1400.0;
+const initialJumpSpeed = ( jumpHeight * 2 / jumpTime ) + ( 0.25 * -gravity * jumpTime );
 
 //----------------------------------------------------------------------------------------------------
 // Initialization Functions
@@ -147,14 +147,14 @@ function reset()
 // Logic to add obstacles to the level
 function addObstacle() {
     // Set obstacle to spawn off the right side of the screen
-    var initialPositionX = canvas.width + 50;
+    const initialPositionX = canvas.width + 50;
 
     // Pick a random obstacle
-    var random = gamedata.obstacleTypes[Math.floor(Math.random() *
+    let random = gamedata.obstacleTypes[Math.floor(Math.random() *
         gamedata.obstacleTypes.length)];
 
     // Add a new obstacle of the type from the list
-    var obstacle = new Entity(initialPositionX, gameFloor +
+    let obstacle = new Entity(initialPositionX, gameFloor +
         random.verticalPos, random.offset[0], random.offset[1], random.size[0],
         random.size[1], random.sprite(), "yellow");
 
@@ -168,10 +168,10 @@ function addObstacle() {
 function addForegroundEntity()
 {
     // Set foreground object to spawn off the right side of the screen
-    var initialPositionX = canvas.width + 50;
+    const initialPositionX = canvas.width + 50;
 
     // Pick a random one
-    var random = gamedata.foregroundTypes[Math.floor( Math.random() * gamedata.foregroundTypes.length )];
+    let random = gamedata.foregroundTypes[Math.floor( Math.random() * gamedata.foregroundTypes.length )];
 
     // Add it to the list
     foregroundEntities.push( new Entity( initialPositionX, random.verticalPos, random.offset[0], random.offset[1], random.size[0], random.size[1], random.sprite() ) );
@@ -185,8 +185,8 @@ function addForegroundEntity()
 function main()
 {
     // Calculate a time delta since last tick
-    var now = Date.now();
-    var dt = ( now - lastTime ) / 1000.0;
+    let now = Date.now();
+    let dt = ( now - lastTime ) / 1000.0;
 
     // Only update if not paused
     if ( !paused )
@@ -242,7 +242,7 @@ function update( dt )
         timeDilation = maxDilation;
     }
     // Calculate new delta time
-    var dilatedTime = timeDilation * dt;
+    let dilatedTime = timeDilation * dt;
 
     // Process input
     handleInput();
@@ -399,7 +399,7 @@ function updateAttack( dt )
 function updateObstacles( dt )
 {
     // Distance change
-    var delta = scrollRate * dt;
+    let delta = scrollRate * dt;
 
     for ( var i = 0; i < obstacles.length; ++i )
     {
@@ -432,7 +432,7 @@ function updateObstacles( dt )
 function updateForeground( dt )
 {
     // Calculate distance delta
-    var delta = scrollRate * dt * foregroundScrollMultiplier;
+    let delta = scrollRate * dt * foregroundScrollMultiplier;
 
     // Loop through foreground objects
     for ( var i = 0; i < foregroundEntities.length; ++i )
@@ -513,15 +513,15 @@ function checkCollisions()
 
 // Collision check between two rectangles
 function boxCollides(pos1, size1, pos2, size2) {
-    var left1 = pos1[0];
-    var right1 = pos1[0] + size1[0];
-    var top1 = pos1[1] + size1[1];
-    var bottom1 = pos1[1];
+    let left1 = pos1[0];
+    let right1 = pos1[0] + size1[0];
+    let top1 = pos1[1] + size1[1];
+    let bottom1 = pos1[1];
 
-    var left2 = pos2[0];
-    var right2 = pos2[0] + size2[0];
-    var top2 = pos2[1] + size2[1];
-    var bottom2 = pos2[1];
+    let left2 = pos2[0];
+    let right2 = pos2[0] + size2[0];
+    let top2 = pos2[1] + size2[1];
+    let bottom2 = pos2[1];
 
     if (right1 < left2 || left1 > right2 || top1 < bottom2 || bottom1 > top2) {
         return false;
@@ -577,8 +577,8 @@ function renderEntity( entity )
     ctx.save();
 
     // Move the canvas to where the entity is, accounting for the sprite offset
-    var positionX = entity.pos[0] - entity.offset[0];
-    var positionY = canvas.height - entity.pos[1] - entity.size[1] - entity.offset[1];
+    let positionX = entity.pos[0] - entity.offset[0];
+    let positionY = canvas.height - entity.pos[1] - entity.size[1] - entity.offset[1];
     ctx.translate( positionX, positionY );
 
     // Render the sprite
