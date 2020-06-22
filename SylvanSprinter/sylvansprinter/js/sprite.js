@@ -35,13 +35,13 @@
         // Render the sprite
         render: function ( ctx )
         {
-            var frame;
+            let frame;
 
             // If an animation is playing, select the correct frame
             if ( this.speed > 0 )
             {
-                var max = this.anims[this.animIndex].length;
-                var idx = Math.floor( this._index );
+                const max = this.anims[this.animIndex].length;
+                const idx = Math.floor( this._index );
 
                 // Check if we're done the animation
                 if ( ( !this.loop ) && idx >= max )
@@ -71,8 +71,8 @@
                 frame = 0;
             }
 
-            var x = this.pos[0];
-            var y = this.pos[1];
+            let x = this.pos[0];
+            let y = this.pos[1];
 
             // Get the frame position in the image
             if ( this.dir == 'vertical' )

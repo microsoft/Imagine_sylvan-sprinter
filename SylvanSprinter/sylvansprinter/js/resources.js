@@ -1,7 +1,7 @@
 ﻿( function ()
 {
-    var resources = {};
-    var readyCallbacks = [];
+    let resources = {};
+    let readyCallbacks = [];
 
     // Load an resource URL or an array of URLs
     function load( urlOrArr )
@@ -30,7 +30,7 @@
         // Otherwise do the load from file
         else
         {
-            var res;
+            let res;
 
             if ( resType )
             {
@@ -41,7 +41,7 @@
                 res = new Image();
             }
 
-            var loadCB = function ()
+            let loadCB = function ()
             {
                 resources[url] = res;
 

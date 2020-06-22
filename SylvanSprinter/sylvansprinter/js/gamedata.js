@@ -1,7 +1,7 @@
 ﻿( function()
 {
     // Background layer data
-    var terrainTextures = [
+    let terrainTextures = [
         // Layer behind everything - first rendered
         {
             scrollMultiplier: 0.5,
@@ -35,7 +35,7 @@
 
     // Sprite definitions
     // These are defined as functions to return a new sprite every time one is requested
-    var sprites =
+    let sprites =
     {
         character: function()
         {
